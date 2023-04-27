@@ -15,14 +15,18 @@ abstract class Raquet{
      rect(x,y, w,h);
   }
   public void updatePosition(){
+    y += vy;
   }
   public void limitOutScreen(){
   }
   public void moveUp(){
+    vy=-10;
   }
   public void moveDown() {
+    vy=+10;
   }
   public void stop(){
+    vy=0;
   }
 }
 
@@ -72,18 +76,23 @@ public void setup() {
   fill(255,255,255);
   stroke(255,255,255);
   
-  RaquetL raquetL = new RaquetL();
+  raquetL = new RaquetL();
   
 }
 
 public void draw(){
   background(0);
   raquetL.draw();
+  raquetL.updatePosition();
 }
 
 public void keyPressed(){
+  if(key == 'w') raquetL.moveUp();
+  if(key == 's') raquetL.moveDown();
 }
 public void keyReleased(){
+  if(key == 'w' || key == 's') raquetL.stop();
+  
 }
 public void reset(){
 }
