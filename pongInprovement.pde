@@ -1,3 +1,5 @@
+import processing.sound.*;
+
 import java.awt.Color;
 
 abstract class Raquet{
@@ -67,9 +69,19 @@ class Ball{
     vx=3;
     vy=3;
     
+    float M;
+    float N;
+    int dir = (int)Math.round(Math.random());  //0   1
+    if(dir == 1){
+      M=-30;
+      N=+30;
+    }else{
+      M=180-30;
+      N=180+30;
+    }
     
-    float M=0;
-    float N=360;
+    
+    
     float anguloGrados = (float)(Math.random()*(N-M+1)+M);
     double anguloRadianes = (anguloGrados * Math.PI)/180;
     vx = (float)Math.cos(anguloRadianes) * 5;
@@ -115,8 +127,10 @@ class Ball{
   }
   
   public void controlCollisionLeftRaquet(Raquet r) {
+   
     if(x <= r.x+r.w && x+w >r.x ){
       if(y+w > r.y  &&  y < r.y+r.h ){
+         rebote.play();
         vx *= -1;
         x=r.x+r.w;
         // incremento dificulta
@@ -127,8 +141,10 @@ class Ball{
     
   }
   public void controlCollisionRightRaquet(Raquet r) {
+    
     if(x+w >= r.x && x < r.x+r.w){
       if(y+w > r.y  &&  y < r.y+r.h ){
+        rebote.play();
         vx *= -1;
         x=r.x-w;
          // incremento dificulta
@@ -144,9 +160,9 @@ private float previousMilli=millis();
 
 ArrayList<Ball> balls;
 
-
 RaquetL raquetL;
 RaquetR raquetR;
+SoundFile rebote;
 
 public void setup() {
   size(640,480);
@@ -156,6 +172,7 @@ public void setup() {
   raquetL = new RaquetL();
   raquetR = new RaquetR();
   balls = new ArrayList<Ball>();
+  rebote = new SoundFile(this, "rebote.mp3");
   
 }
 
