@@ -66,6 +66,7 @@ class Ball{
     vx=3;
     vy=3;
   }
+
   public void updatePosition() {
     x = x + vx;
     y = y + vy;
