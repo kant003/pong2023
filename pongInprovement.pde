@@ -67,23 +67,13 @@ class Ball{
     vx=3;
     vy=3;
     
+    
     float M=0;
     float N=360;
-    
-    int dir = (int)(Math.round( Math.random() ));
-    if(dir == 1){
-      M=180-40;
-      N=180+40;
-    }else{
-      M=1-40;
-      N=1+40;
-    }
-    
-
     float anguloGrados = (float)(Math.random()*(N-M+1)+M);
     double anguloRadianes = (anguloGrados * Math.PI)/180;
-    vx = (float)Math.cos(anguloRadianes) * 400 *deltaTimeSegundos;
-    vy = (float)Math.sin(anguloRadianes) * 400 *deltaTimeSegundos;
+    vx = (float)Math.cos(anguloRadianes) * 5;
+    vy = (float)Math.sin(anguloRadianes) * 5;
   }
   
   
@@ -208,15 +198,7 @@ public void draw(){
     ball.controlCollisionRightRaquet(raquetR);
   
   }
-  deltaTimeSegundos = (millis()-tiempoFramePrevio) / 1000. ;
-  tiempoFramePrevio = millis();
- 
-
-      text(deltaTimeSegundos, width-200,40);
-  
 }
-float deltaTimeSegundos;
-int tiempoFramePrevio;
 
 public void keyPressed(){
   if(key == 'w') raquetL.moveUp();
